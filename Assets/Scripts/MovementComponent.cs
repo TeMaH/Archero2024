@@ -9,12 +9,6 @@ public class MovementComponent : MonoBehaviour
         get { return characterController = characterController ?? GetComponent<CharacterController>(); }
     }
 
-    private Camera characterCamera;
-    public Camera CharacterCamera
-    {
-        get { return characterCamera = characterCamera ?? FindObjectOfType<Camera>(); }
-    }
-
     private Vector2 moveDirection;
 
     private Vector3 move;
@@ -26,13 +20,13 @@ public class MovementComponent : MonoBehaviour
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float speedMovement;
 
-    private void Update()
+    public void Move()
     {
         move = new Vector3(moveDirection.x, 0.0f, moveDirection.y);
 
         verticalVelocity.y = verticalVelocity.y + gravity * Time.deltaTime;
 
-        var rotatedMovement = Quaternion.Euler(0.0f, CharacterCamera.transform.rotation.eulerAngles.y, 0.0f) * move.normalized;
+        var rotatedMovement = Quaternion.Euler(1f, 1f, 1f) * move.normalized;
         var verticalMovement = Vector3.up * verticalVelocity.y;
 
         if (move.magnitude > 0.0f)
