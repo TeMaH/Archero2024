@@ -9,12 +9,6 @@ public class MovementComponent : MonoBehaviour
         get { return characterController = characterController ?? GetComponent<CharacterController>(); }
     }
 
-    private Camera characterCamera;
-    public Camera CharacterCamera
-    {
-        get { return characterCamera = characterCamera ?? FindObjectOfType<Camera>(); }
-    }
-
     private Vector2 moveDirection;
 
     private Vector3 move;
@@ -32,7 +26,7 @@ public class MovementComponent : MonoBehaviour
 
         verticalVelocity.y = verticalVelocity.y + gravity * Time.deltaTime;
 
-        var rotatedMovement = Quaternion.Euler(0.0f, CharacterCamera.transform.rotation.eulerAngles.y, 0.0f) * move.normalized;
+        var rotatedMovement = Quaternion.Euler(1f, 1f, 1f) * move.normalized;
         var verticalMovement = Vector3.up * verticalVelocity.y;
 
         if (move.magnitude > 0.0f)
@@ -48,17 +42,7 @@ public class MovementComponent : MonoBehaviour
         CharacterController.transform.rotation = Quaternion.Lerp(currentRotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
-    private void OnEnable()
-    {
-        InputController.MoveEvent += HandleMove;
-    }
-
-    private void OnDisable()
-    {
-        InputController.MoveEvent -= HandleMove;
-    }
-
-    private void HandleMove(Vector2 dir)
+    public void HandleMove(Vector2 dir)
     {
         moveDirection = dir;
     }
