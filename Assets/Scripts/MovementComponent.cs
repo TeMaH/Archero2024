@@ -20,7 +20,7 @@ public class MovementComponent : MonoBehaviour
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float speedMovement;
 
-    public void Move()
+    private void Update()
     {
         move = new Vector3(moveDirection.x, 0.0f, moveDirection.y);
 
@@ -42,17 +42,7 @@ public class MovementComponent : MonoBehaviour
         CharacterController.transform.rotation = Quaternion.Lerp(currentRotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
-    private void OnEnable()
-    {
-        InputController.MoveEvent += HandleMove;
-    }
-
-    private void OnDisable()
-    {
-        InputController.MoveEvent -= HandleMove;
-    }
-
-    private void HandleMove(Vector2 dir)
+    public void HandleMove(Vector2 dir)
     {
         moveDirection = dir;
     }
