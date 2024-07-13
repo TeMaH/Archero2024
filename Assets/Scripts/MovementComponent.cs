@@ -1,18 +1,12 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MovementComponent : MonoBehaviour
+public class MovementComponent : MonoBehaviour, IMovable
 {
     private CharacterController characterController;
     public CharacterController CharacterController
     {
         get { return characterController = characterController ?? GetComponent<CharacterController>(); }
-    }
-
-    private Camera characterCamera;
-    public Camera CharacterCamera
-    {
-        get { return characterCamera = characterCamera ?? FindObjectOfType<Camera>(); }
     }
 
     private Vector2 moveDirection;
@@ -32,34 +26,23 @@ public class MovementComponent : MonoBehaviour
 
         verticalVelocity.y = verticalVelocity.y + gravity * Time.deltaTime;
 
-        var rotatedMovement = Quaternion.Euler(0.0f, CharacterCamera.transform.rotation.eulerAngles.y, 0.0f) * move.normalized;
-        var verticalMovement = Vector3.up * verticalVelocity.y;
+        Vector3 newPosition = move * speedMovement * Time.deltaTime;
 
-        if (move.magnitude > 0.0f)
-        {
-            rotationAngle = Mathf.Atan2(rotatedMovement.x, rotatedMovement.z) * Mathf.Rad2Deg;
-        }
-
-        CharacterController.Move((verticalMovement + rotatedMovement * speedMovement) * Time.deltaTime);
+        CharacterController.Move(newPosition);
 
         Quaternion currentRotation = CharacterController.transform.rotation;
-        Quaternion targetRotation = Quaternion.Euler(0.0f, rotationAngle, 0.0f);
+        Quaternion targetRotation = Quaternion.LookRotation(move);
 
         CharacterController.transform.rotation = Quaternion.Lerp(currentRotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
-    private void OnEnable()
+    public void SartMovement(Vector2 vector2)
     {
-        InputController.MoveEvent += HandleMove;
+        moveDirection = vector2;
     }
 
-    private void OnDisable()
+    public void StopMovement()
     {
-        InputController.MoveEvent -= HandleMove;
-    }
-
-    public void HandleMove(Vector2 dir)
-    {
-        moveDirection = dir;
+        
     }
 }

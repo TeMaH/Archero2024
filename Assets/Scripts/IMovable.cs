@@ -1,7 +1,7 @@
 using UnityEngine;
-
 public interface IMovable
 {
-    public void StartMovement(Vector2 direction);
+    public void SartMovement(Vector2 vector2);
+
     public void StopMovement();
 }

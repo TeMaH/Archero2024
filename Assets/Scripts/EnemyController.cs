@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public Transform Target;
-
     [SerializeField] private float _timeToUpdateDirection;
     [SerializeField] private float _movingTime;
 
     private IMovable MovementComponent { get { return _movement = _movement ?? GetComponent<IMovable>(); } }
     private IMovable _movement;
 
+    private Vector2 _direction;
+
     private bool _isMoving;
     private float _timerToUpdateDirection;
 
     private void SetRandomTarget()
     {
-        Target.position = new Vector3(Random.Range(-8, 9), 0.0f, Random.Range(-13, 14));
+        _direction = new Vector2(Random.Range(-1, 2), Random.Range(-1, 2));
     }
 
     private IEnumerator MoveToTarget(float movingTime)
     {
-        MovementComponent.StartMovement(Target.position);
+        MovementComponent.SartMovement(_direction);
         _isMoving = true;
 
         yield return new WaitForSeconds(movingTime);
