@@ -11,7 +11,7 @@ public class Character : MonoBehaviour
 
     private void InputController_MoveEvent(Vector2 input)
     {
-        movementComponent.HandleMove(input);
+        movementComponent.SartMovement(input);
     }
 
     private void OnDisable()

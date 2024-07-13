@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MovementComponent : MonoBehaviour
+public class MovementComponent : MonoBehaviour, IMovable
 {
     private CharacterController characterController;
     public CharacterController CharacterController
@@ -36,8 +36,13 @@ public class MovementComponent : MonoBehaviour
         CharacterController.transform.rotation = Quaternion.Lerp(currentRotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
-    public void HandleMove(Vector2 dir)
+    public void SartMovement(Vector2 vector2)
     {
-        moveDirection = dir;
+        moveDirection = vector2;
+    }
+
+    public void StopMovement()
+    {
+        
     }
 }
