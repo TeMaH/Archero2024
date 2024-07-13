@@ -58,7 +58,7 @@ public class MovementComponent : MonoBehaviour
         InputController.MoveEvent -= HandleMove;
     }
 
-    private void HandleMove(Vector2 dir)
+    public void HandleMove(Vector2 dir)
     {
         moveDirection = dir;
     }
