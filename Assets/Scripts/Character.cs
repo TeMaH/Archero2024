@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Character : MonoBehaviour
@@ -13,7 +11,7 @@ public class Character : MonoBehaviour
 
     private void InputController_MoveEvent(Vector2 input)
     {
-        movementComponent.HandleMove(input);
+        movementComponent.SartMovement(input);
     }
 
     private void OnDisable()
