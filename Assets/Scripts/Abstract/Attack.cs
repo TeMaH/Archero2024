@@ -26,15 +26,17 @@ public class Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-        if (target == null) { FindEnemy(); }
-        time += Time.deltaTime;
-        if (time > frequency)
+        SetTarget();
+        if (target != null)
         {
-            AttackTarget();
-            time -= frequency;
+            time += Time.deltaTime;
+            if (time > frequency)
+            {
+                AttackTarget();
+                time -= frequency;
+            }
+            if (currentArrow != null) { Shoot(); }
         }
-        if (currentArrow != null) { Shoot(); }
     }
     public void CheckMoving() 
     {
@@ -58,19 +60,7 @@ public class Attack : MonoBehaviour
             arrowList.Add(currentArrow);
         }
     }
-    void FindEnemy() 
-    {
-        var objects = Physics.OverlapSphere(transform.position, attackDistance);
-
-        for (int i = 0; i < objects.Length; i++)
-        {
-            if ( objects[i].gameObject.CompareTag("Enemy"))
-            {
-                target = objects[i].gameObject;
-                Debug.Log(target.transform.position);
-            }
-        }
-    }
+    
     void Shoot() 
     {
         for (int i = 0;i < arrowList.Count; i++) 
@@ -80,5 +70,10 @@ public class Attack : MonoBehaviour
                 arrowList[i].transform.position = Vector3.MoveTowards(arrowList[i].transform.position, target.transform.position, arrowSpeed * Time.deltaTime);
             }
         }
+    }
+    void SetTarget()
+    {
+        SearchTarget targetSearch = GetComponent<SearchTarget>();
+        target = targetSearch.GetTarget();
     }
 }

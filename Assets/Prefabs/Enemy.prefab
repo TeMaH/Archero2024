@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 6026220885897566293}
   - component: {fileID: 4837014733361731493}
   - component: {fileID: 7195989070402949552}
-  m_Layer: 0
+  - component: {fileID: 5540401114844649927}
+  m_Layer: 3
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -104,6 +105,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 10
   AutoHealPerSec: 0
+--- !u!114 &5540401114844649927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424388745272678249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 501147ff08a549a45b625c57104b6ab8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectionRadius: 20
+  viewRadius: 10
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &4263707924245521787
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,7 +134,7 @@ GameObject:
   - component: {fileID: 8760354501664144821}
   - component: {fileID: 3303425806090997204}
   - component: {fileID: 5826330705967207827}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
