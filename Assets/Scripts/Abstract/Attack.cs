@@ -65,7 +65,7 @@ public class Attack : MonoBehaviour
     {
         for (int i = 0;i < arrowList.Count; i++) 
         {
-            if (arrowList[i] != null)
+            if (arrowList[i] != null && target != null)
             {
                 arrowList[i].transform.position = Vector3.MoveTowards(arrowList[i].transform.position, target.transform.position, arrowSpeed * Time.deltaTime);
             }

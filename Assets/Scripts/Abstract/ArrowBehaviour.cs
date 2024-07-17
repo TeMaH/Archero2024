@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.Android;
 
 public class ArrowBehaviour : MonoBehaviour
 {
@@ -12,9 +9,11 @@ public class ArrowBehaviour : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.TryGetComponent<HealthComponent>(out var healthComponent))
+        if (other.gameObject.CompareTag("Enemy") && other.gameObject.TryGetComponent<HealthComponent>(out var healthComponent))
         {
             healthComponent.GetDamage(damageRate);
         }
+
+        Destroy(gameObject);
     }
 }
