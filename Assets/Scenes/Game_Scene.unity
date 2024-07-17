@@ -1001,7 +1001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 1310483500}
-  _playerPrefab: {fileID: -7564121607170795702, guid: 617f5ae66bb2da54499520a901454675, type: 3}
+  _playerPrefab: {fileID: 1540581247412125865, guid: 617f5ae66bb2da54499520a901454675, type: 3}
   _playerSpot: {fileID: 1241225993}
   _enemiesController: {fileID: 148129490}
   _enemiesCount: 1
