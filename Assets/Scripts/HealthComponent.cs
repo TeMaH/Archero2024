@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class HealthComponent : MonoBehaviour
 {
-    public UnityAction PlayerDied;
+    public UnityAction<GameObject> PlayerDied;
     public UnityAction PlayerResurrected;
 
     public int MaxHealth;
@@ -37,7 +37,7 @@ public class HealthComponent : MonoBehaviour
         if (_currentHealth <= 0)
         {
             _currentHealth = 0;
-            PlayerDied?.Invoke();
+            PlayerDied?.Invoke(gameObject);
         }
         else if (_currentHealth > MaxHealth)
         {
