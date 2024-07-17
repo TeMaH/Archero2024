@@ -10,6 +10,7 @@ public class GameplayController : MonoBehaviour
     [SerializeField] private Transform _playerSpot;
 
     [SerializeField] private EnemiesController _enemiesController;
+    [SerializeField] private int _enemiesCount;
 
     private HealthComponent _player;
     private void Start()
@@ -20,16 +21,21 @@ public class GameplayController : MonoBehaviour
     private void StartGame()
     {
         _canvas.SetEnabledForButtons(false);
-        _enemiesController.Init();
-        _player = Instantiate(_playerPrefab);
-        _player.Init();
-        _player.PlayerDied += PlayerLose;
-        _player.transform.position = _playerSpot.position;
+        _enemiesController.Init(_enemiesCount);
+
+        if(_player == null)
+        {
+            _player = Instantiate(_playerPrefab);
+            _player.transform.position = _playerSpot.position;
+            _player.Init();
+            _player.PlayerDied += PlayerLose;
+        }
     }
     private void PlayerWin()
     {
         //Logic for winning
-        StopGame();
+        _enemiesCount++;
+        _enemiesController.Init(_enemiesCount);
     }
 
     private void PlayerLose(GameObject player)

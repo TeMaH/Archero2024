@@ -7,17 +7,17 @@ public class EnemiesController : MonoBehaviour
 {
     public UnityAction AllEnemiesDied;
 
-    [SerializeField] private List<Transform> _enemySpots;
+    [SerializeField] private List<Transform> _enemySpots = new List<Transform>();
     [SerializeField] private EnemyController _enemyPrefab;
 
     private List<EnemyController> _enemies = new List<EnemyController>();
 
-    public void Init()
+    public void Init(int enemiesCount)
     {
-        for (int i = 0; i < _enemySpots.Count; i++)
+        for (int i = 0; i < enemiesCount; i++)
         {
             var enemy = Instantiate(_enemyPrefab);
-            enemy.transform.position = _enemySpots[i].transform.position;
+            enemy.transform.position = _enemySpots[Random.Range(0, _enemySpots.Count)].transform.position;
             _enemies.Add(enemy);
 
             if (enemy.TryGetComponent<HealthComponent>(out var hc))
