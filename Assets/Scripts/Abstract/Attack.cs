@@ -26,7 +26,7 @@ public class Attack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        SetTarget();
         if (target != null)
         {
             time += Time.deltaTime;
@@ -71,8 +71,9 @@ public class Attack : MonoBehaviour
             }
         }
     }
-    public void SetTarget(GameObject target)
+    void SetTarget()
     {
-        this.target = target;
+        SearchTarget targetSearch = GetComponent<SearchTarget>();
+        target = targetSearch.GetTarget();
     }
 }

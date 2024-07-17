@@ -39,13 +39,25 @@ public class SearchTarget : MonoBehaviour
         }
 
         target = nearestTarget;
-        if (target != null)
+        //if (target != null)
+        //{
+        //    Attack attackScript = GetComponent<Attack>();
+        //    if (attackScript != null)
+        //    {
+        //        attackScript.SetTarget(target);
+        //    }
+        //}
+    }
+    public GameObject GetTarget() 
+    {
+        if (target != null) 
         {
-            Attack attackScript = GetComponent<Attack>();
-            if (attackScript != null)
-            {
-                attackScript.SetTarget(target);
-            }
+            return target;
+        }
+        else 
+        {
+            Debug.Log("There is no target!");
+            return null;
         }
     }
 }
