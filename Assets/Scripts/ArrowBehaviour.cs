@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ArrowBehaviour : MonoBehaviour
@@ -22,12 +23,14 @@ public class ArrowBehaviour : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            //other.GetComponent<TakeDamage>().TakeDamage(damageRate);
-            Debug.Log("Strike!!!");
-            Destroy(gameObject);
-        }
+        Debug.Log("Strike!!!");
+        Destroy(gameObject);
+        //if (other.gameObject.CompareTag("Enemy"))
+        //{
+        //    //other.GetComponent<TakeDamage>().TakeDamage(damageRate);
+        //    Debug.Log("Strike!!!");
+        //    Destroy(gameObject);
+        //}
     }
     private void OnCollisionStay(Collision other)
     {
