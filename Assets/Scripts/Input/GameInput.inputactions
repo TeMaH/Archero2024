@@ -83,6 +83,45 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UIJoystick",
+            "id": "6705d6a1-b33f-474f-ae90-3ba4e9f94948",
+            "actions": [
+                {
+                    "name": "TapScreen",
+                    "type": "Button",
+                    "id": "b65b328b-f73b-4b82-b0a2-2988b9348c88",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "fa910159-b165-4534-802c-f233c8f55535",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TapScreen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "08037136-299c-4cea-8950-32c9b4124c2c",
+                    "path": "<Touchscreen>/primaryTouch/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TapScreen",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
