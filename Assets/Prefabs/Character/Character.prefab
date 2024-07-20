@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 1540581247412125865}
   m_Layer: 6
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -350,5 +350,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a254ab0941ebd0d44a46cdae67bd5ac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 0
-  AutoHealPerSec: 0
+  MaxHealth: 100
+  AutoHealPerSec: 1

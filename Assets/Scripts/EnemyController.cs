@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] private float _timeToUpdateDirection;
+    public float TimeToUpdateDirection;
     [SerializeField] private float _movingTime;
 
     private IMovable MovementComponent { get { return _movement = _movement ?? GetComponent<IMovable>(); } }
@@ -32,7 +32,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
-        _timerToUpdateDirection = _timeToUpdateDirection;
+        _timerToUpdateDirection = TimeToUpdateDirection;
     }
     private void Update()
     {
@@ -45,7 +45,7 @@ public class EnemyController : MonoBehaviour
 
         if (_timerToUpdateDirection <= 0.0f) 
         {
-            _timerToUpdateDirection = _timeToUpdateDirection;
+            _timerToUpdateDirection = TimeToUpdateDirection;
             SetRandomTarget();
             StartCoroutine(MoveToTarget(_movingTime));
         }
