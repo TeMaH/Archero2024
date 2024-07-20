@@ -17,9 +17,15 @@ public class HealthComponent : MonoBehaviour
 
     private Animator characterAnimator;
 
+    private bool isLoaded;
+
     private void Start()
     {
-        characterAnimator = GetComponent<Animator>();
+        if (GetComponent<Animator>())
+        {
+            characterAnimator = GetComponent<Animator>();
+            isLoaded = true;
+        }
     }
 
     public void Init()
@@ -45,9 +51,12 @@ public class HealthComponent : MonoBehaviour
         if (_currentHealth <= 0)
         {
             _currentHealth = 0;
-            PlayerDied?.Invoke();
+            PlayerDied?.Invoke(gameObject);
 
-            characterAnimator.SetBool("isDeath", true);
+            if (isLoaded)
+            {
+                characterAnimator.SetBool("isDeath", true);
+            }
         }
         else if (_currentHealth > MaxHealth)
         {
