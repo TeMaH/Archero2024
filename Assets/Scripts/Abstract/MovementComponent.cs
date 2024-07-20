@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class MovementComponent : MonoBehaviour, IMovable
 {
@@ -9,6 +8,8 @@ public class MovementComponent : MonoBehaviour, IMovable
         get { return characterController = characterController ?? GetComponent<CharacterController>(); }
     }
 
+    private Animator characterAnimator;
+
     private Vector2 moveDirection;
 
     private Vector3 move;
@@ -17,8 +18,15 @@ public class MovementComponent : MonoBehaviour, IMovable
     private float rotationAngle;
     private float gravity = -9.81f;
 
+    private bool setAnim = true;
+
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float speedMovement;
+
+    private void Start()
+    {
+        characterAnimator = GetComponent<Animator>();
+    }
 
     private void Update()
     {
@@ -27,6 +35,23 @@ public class MovementComponent : MonoBehaviour, IMovable
         verticalVelocity.y = verticalVelocity.y + gravity * Time.deltaTime;
 
         Vector3 newPosition = move * speedMovement * Time.deltaTime;
+
+        if (move.magnitude > 0.0f)
+        {
+            if (setAnim)
+            {
+                characterAnimator.SetBool("isRun", true);
+                setAnim = false;
+            }
+        }
+        if (move.magnitude == 0.0f)
+        {
+            if (!setAnim)
+            {
+                characterAnimator.SetBool("isRun", false);
+                setAnim = true;
+            }
+        }
 
         CharacterController.Move(newPosition);
 

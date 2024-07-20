@@ -16,11 +16,15 @@ public class Attack : MonoBehaviour
     public float frequency;
     private float time;
     CharacterController controller;
+    private Animator characterAnimator;
+
     public CharacterController CharacterController { get { return controller = controller ?? GetComponent<CharacterController>(); } }
     void Start()
     {
         time = frequency;
         arrowList = new List<GameObject>();
+
+        characterAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -67,6 +71,7 @@ public class Attack : MonoBehaviour
         {
             if (arrowList[i] != null && target != null)
             {
+                SetAnimAttack();
                 arrowList[i].transform.position = Vector3.MoveTowards(arrowList[i].transform.position, target.transform.position, arrowSpeed * Time.deltaTime);
             }
         }
@@ -75,5 +80,19 @@ public class Attack : MonoBehaviour
     {
         SearchTarget targetSearch = GetComponent<SearchTarget>();
         target = targetSearch.GetTarget();
+    }
+
+    private void SetAnimAttack()
+    {
+        characterAnimator.SetBool("isAttack", true);
+
+        StartCoroutine(StopAnimAttack());
+    }
+
+    private IEnumerator StopAnimAttack()
+    {
+        yield return new WaitForSeconds(2);
+
+        characterAnimator.SetBool("isAttack", false);
     }
 }
