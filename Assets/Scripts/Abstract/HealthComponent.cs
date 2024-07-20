@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,6 +14,13 @@ public class HealthComponent : MonoBehaviour
 
     private bool _issAutoHealing;
     private float _currentHealth;
+
+    private Animator characterAnimator;
+
+    private void Start()
+    {
+        characterAnimator = GetComponent<Animator>();
+    }
 
     public void Init()
     {
@@ -37,7 +45,9 @@ public class HealthComponent : MonoBehaviour
         if (_currentHealth <= 0)
         {
             _currentHealth = 0;
-            PlayerDied?.Invoke(gameObject);
+            PlayerDied?.Invoke();
+
+            characterAnimator.SetBool("isDeath", true);
         }
         else if (_currentHealth > MaxHealth)
         {
