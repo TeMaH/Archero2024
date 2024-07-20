@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
+    public UnityAction<Environment> LevelLoaded;
+    public UnityAction LevelsFinished;
 
-    [SerializeField] private List<GameObject> _levelPrefabs;
-    [SerializeField] private Transform _playerStartPosition;
+    [SerializeField] private List<Environment> _levelPrefabs;
 
+    private Transform _playerStartPosition;
     private int _currentLevelIndex = -1;
-    private GameObject _currentLevelInstance;
+    private Environment _currentLevelInstance;
     private GameObject _player;
 
     private void Awake()
@@ -18,7 +21,7 @@ public class LevelManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -26,9 +29,9 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    public void Refresh()
     {
-        LoadNextLevel();
+        _currentLevelIndex = -1;
     }
 
     private void OnPlayerEnteredPortal()
@@ -42,6 +45,7 @@ public class LevelManager : MonoBehaviour
         else
         {
             Debug.Log("Все уровни завершены!");
+            LevelsFinished?.Invoke();
         }
     }
 
@@ -49,12 +53,12 @@ public class LevelManager : MonoBehaviour
     {
         if (_currentLevelInstance != null)
         {
-            Destroy(_currentLevelInstance);
+            Destroy(_currentLevelInstance.gameObject);
         }
 
         _currentLevelInstance = Instantiate(_levelPrefabs[_currentLevelIndex]);
 
-        ExitPortal exitPortal = FindObjectOfType<ExitPortal>();
+        ExitPortal exitPortal = _currentLevelInstance.ExitPortal;
 
         if (exitPortal != null)
         {
@@ -66,6 +70,8 @@ public class LevelManager : MonoBehaviour
         }
 
         MovePlayerToStartPosition();
+
+        LevelLoaded?.Invoke(_currentLevelInstance);
 
         yield return null;
     }
@@ -90,6 +96,8 @@ public class LevelManager : MonoBehaviour
         {
             _player = GameObject.FindGameObjectWithTag("Player");
         }
+
+        _playerStartPosition = _currentLevelInstance.PlayerSpot;
 
         if (_playerStartPosition != null && _player != null)
         {
