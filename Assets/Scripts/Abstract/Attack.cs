@@ -39,7 +39,7 @@ public class Attack : MonoBehaviour
                 AttackTarget();
                 time -= frequency;
             }
-            if (currentArrow != null) { Shoot(); }
+            //if (currentArrow != null) { Shoot(); }
         }
     }
     public void CheckMoving() 
@@ -57,17 +57,23 @@ public class Attack : MonoBehaviour
     {
         if (target != null && !isMoving)
         {
-            Vector3 shotDirection = target.transform.position - transform.position;
+            Vector3 shotDirection = (target.transform.position - spotForArrow.position).normalized;
             Quaternion rotation = Quaternion.LookRotation(shotDirection, Vector3.up);
 
             currentArrow = Instantiate(arrow, spotForArrow.transform.position, rotation);
-            arrowList.Add(currentArrow);
+            //arrowList.Add(currentArrow);
+
+            if (currentArrow.TryGetComponent<IMovable>(out var movable))
+            {
+                SetAnimAttack();
+                movable.SartMovement(shotDirection);
+            }
         }
     }
-    
-    void Shoot() 
+
+    void Shoot()
     {
-        for (int i = 0;i < arrowList.Count; i++) 
+        for (int i = 0; i < arrowList.Count; i++)
         {
             if (arrowList[i] != null && target != null)
             {

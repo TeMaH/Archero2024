@@ -154,6 +154,7 @@ GameObject:
   - component: {fileID: 2351756495423870625}
   - component: {fileID: 8062628731307706841}
   - component: {fileID: 1540581247412125865}
+  - component: {fileID: -7356457852589996605}
   m_Layer: 6
   m_Name: Character
   m_TagString: Player
@@ -352,3 +353,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 100
   AutoHealPerSec: 1
+--- !u!95 &-7356457852589996605
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7403833635907186142}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 707746fd800629a4c946153a846e6f40, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
